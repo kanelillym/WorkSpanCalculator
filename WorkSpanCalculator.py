@@ -1,6 +1,7 @@
 from datetime import datetime
 import sys
 
+# Default values
 START_DAY = datetime(2021, 10, 30)
 WORK_SPAN_LENGTH = 3
 DAYS_OFF_PER_SPAN = 1
