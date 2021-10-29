@@ -11,8 +11,8 @@ def main() -> None:
 		return
 	
 	startDate, span, rest = readSysArgs()
-	result = isBreakDay(datetime.now(), startDate, span, rest)
-	printResults(result)
+	result, remainder = isBreakDay(datetime.now(), startDate, span, rest)
+	printResults(result, remainder)
 
 
 def helpMessageIsRequested() -> bool:
@@ -43,19 +43,21 @@ def readSysArgs() -> (datetime, int, int):
 	return (startDate, span, rest)
 
 
-def printResults(result: bool) -> None:
+def printResults(result: bool, remainder: int) -> None:
 	if result:
 		print("Today is a break day.")
 	else:
-		print("Today is a work day.")
+		print("Today is a work day. The next rest day is in " + str(remainder) + " day(s).")
 
 
 def getDaysSinceStart(targetDate: datetime, startDate: datetime = START_DAY) -> int:
 	return (targetDate.date() - startDate.date()).days
 
 
-def isBreakDay(targetDate: datetime, startDate: datetime = START_DAY, spanLength: int = WORK_SPAN_LENGTH, restDayCount: int = DAYS_OFF_PER_SPAN) -> bool:
-	return getDaysSinceStart(targetDate, startDate) % spanLength < restDayCount
+def isBreakDay(targetDate: datetime, startDate: datetime = START_DAY, spanLength: int = WORK_SPAN_LENGTH, restDayCount: int = DAYS_OFF_PER_SPAN) -> (bool, int):
+	cycleProgress = getDaysSinceStart(targetDate, startDate) % spanLength
+	isRestDay = cycleProgress < restDayCount
+	return (isRestDay, spanLength - cycleProgress)
 
 
 if __name__ == "__main__":
