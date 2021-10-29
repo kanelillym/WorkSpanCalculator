@@ -1,8 +1,8 @@
 from datetime import datetime
 import sys
 
-START_DAY = datetime(2021, 7, 3)
-WORK_SPAN_LENGTH = 4
+START_DAY = datetime(2021, 10, 30)
+WORK_SPAN_LENGTH = 3
 DAYS_OFF_PER_SPAN = 1
 
 def main() -> None:
