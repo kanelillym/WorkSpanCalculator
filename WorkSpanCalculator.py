@@ -48,7 +48,10 @@ def printResults(result: bool, remainder: int) -> None:
 	if result:
 		print("Today is a break day.")
 	else:
-		print("Today is a work day. The next rest day is in " + str(remainder) + " day(s).")
+                if remainder == 1:
+                        print("Today is a work day. The next rest day is tomorrow.")
+                else:
+                        print("Today is a work day. The next rest day is in " + str(remainder) + " day(s).")
 
 
 def getDaysSinceStart(targetDate: datetime, startDate: datetime = START_DAY) -> int:
